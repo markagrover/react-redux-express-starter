@@ -1,0 +1,1 @@
+export const FETCH_TEST_DATA = 'fetch_test_data';
