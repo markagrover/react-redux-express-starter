@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route ,Link , Switch} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -8,18 +8,31 @@ class App extends Component {
         this.props.fetchTestData();
     }
     render(){
-        return (
-            <div>
-                Hello There.
-                <a href="/api/data">Get Data</a>
+        const DataComponent = () => {
+            return <div>
+                {this.props.testReducer}
             </div>
+        };
+        return (
+            <Router>
+
+                    <div>
+                        <Link to={'/api/data1'}>Data</Link>
+
+                            <Route path={'/api/data1'} render={DataComponent}/>
+
+                    </div>
+            </Router>
+
         );
     }
 
 }
 
 function mapStateToProps(state){
-
+    return {
+        testReducer: state.testReducer
+    }
 }
 
-export default connect(null, actions)(App);
+export default connect(mapStateToProps, actions)(App);
